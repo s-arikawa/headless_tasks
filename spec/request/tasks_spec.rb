@@ -14,6 +14,30 @@ RSpec.describe TasksController, type: :request do
         json = JSON.parse(response.body)
         expect('Doing').to eq json['task']['status']
       end
+
+      context '変なステータスに更新しようとした場合' do
+        subject { put '/tasks/1/status', params: { task: { status: 'Noting' } } }
+        it 'status 400を返すこと' do
+          subject
+          expect(response.status).to eq 400
+        end
+      end
+
+      context 'ステータスが空文字の場合' do
+        subject { put '/tasks/1/status', params: { task: { status: '' } } }
+        it 'status 400を返すこと' do
+          subject
+          expect(response.status).to eq 400
+        end
+      end
+
+      context 'ステータスが未指定の場合' do
+        subject { put '/tasks/1/status', params: { task: {} } }
+        it 'status 400を返すこと' do
+          subject
+          expect(response.status).to eq 400
+        end
+      end
     end
 
     context '存在しないタスクのステータスを更新した場合' do
