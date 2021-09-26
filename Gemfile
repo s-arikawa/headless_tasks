@@ -37,6 +37,7 @@ group :development do
   gem 'brakeman'
   gem 'bundler-audit'
   gem 'spring'
+  gem 'rubocop'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
