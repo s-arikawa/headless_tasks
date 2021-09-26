@@ -1,0 +1,6 @@
+require:
+  - rubocop-rails
+  - rubocop-performance
+  - rubocop-rspec
+
+## ちょっとルールいじるの辛くなったので一旦無し…

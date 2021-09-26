@@ -31,9 +31,20 @@ class TasksController < ApplicationController
     use_case.task_delete(id)
   end
 
+  # PUT /tasks/:id/status
+  def change_status
+    id          = params[:id]
+    dest_status = task_params[:status]&.to_s || ''
+    raise(ArgumentError) unless dest_status.upcase == 'DOING'
+
+    use_case = TasksUseCases::Patch.new
+    @task = use_case.change_status_to_doing(id)
+    render :show
+  end
+
   private
 
   def task_params
-    params.require(:task).permit(:name)
+    params.require(:task).permit(:name, :status)
   end
 end

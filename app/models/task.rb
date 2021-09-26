@@ -10,4 +10,9 @@ class Task < ApplicationRecord
     super
     self.status = TODO
   end
+
+  # ステータスを _Doing_ に変更する。
+  def change_status_to_doing
+    self.status = DOING
+  end
 end
